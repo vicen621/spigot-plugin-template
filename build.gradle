@@ -6,7 +6,6 @@ buildscript {
 
 plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.0'
-    id 'kr.entree.spigradle' version '2.2.4'
     id 'io.freefair.lombok' version '6.3.0'
     id 'java'
     id 'jacoco'
@@ -29,15 +28,6 @@ ext {
 
 group project.property("group")
 
-spigot {
-    name = project.property("pluginName")
-    authors = [project.property("author")]
-    apiVersion = project.property("apiVersion")
-    load = STARTUP
-    // depends = ['']
-    softDepends = ['Vault']
-}
-
 compileJava {
     options.encoding = 'UTF-8'
     options.compilerArgs += ["-parameters"]
@@ -50,17 +40,18 @@ archivesBaseName = project.property("pluginName")
 repositories {
     mavenLocal()
     mavenCentral()
-    spigot()
     maven { url = 'https://jitpack.io' }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url = 'https://repo.aikar.co/content/groups/aikar/' }
     maven { url = 'https://repo.dmulloy2.net/repository/public/' }
-    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/public/' }
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url = 'https://repo.unnamed.team/repository/unnamed-public/' }
 }
 
 dependencies {
     // using spigot-api
-    implementation spigot(mcVersion)
+    compileOnly "org.spigotmc:spigot-api:${mcVersion}-R0.1-SNAPSHOT"
     // or using paper-api
     // implementation "io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT"
 
@@ -68,9 +59,12 @@ dependencies {
     // Here are some opinionated dependencies that might help you with your plugin development:
 
     // Annotation Command Framework: https://github.com/aikar/commands
-    implementation "co.aikar:acf-paper:0.5.0-SNAPSHOT"
-    // Vault (https://github.com/MilkBowl/VaultAPI) for economy, permissions and chat API
-    implementation "com.github.MilkBowl:VaultAPI:1.7.1"
+    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+
+    implementation 'net.silthus.configlib:configlib-bukkit:2.6.0'
+
+    implementation 'me.yushust.message:core:7.0.0'
+    implementation 'me.yushust.message:sourcetype-bukkit-yml:7.0.0'
 
     // Test dependencies
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
@@ -82,15 +76,19 @@ dependencies {
 shadowJar {
     classifier = ''
     dependencies {
-        include(dependency('co.aikar:acf-paper:0.5.0-SNAPSHOT'))
+        include(dependency('co.aikar:acf-paper:0.5.1-SNAPSHOT'))
+        include(dependency('net.silthus.configlib:configlib-bukkit:'))
+        include(dependency('me.yushust.message:core:'))
+        include(dependency('me.yushust.message:sourcetype-bukkit-yml:'))
     }
     relocate 'co.aikar.commands', "${packageName}.acf"
     relocate 'co.aikar.locales', "${packageName}.locales"
+    relocate 'de.exlll.configlib', "${packageName}.configlib"
+    relocate 'me.yushust.message', "${packageName}.nmessage"
 }
 
 tasks.build.dependsOn(shadowJar)
 tasks.publish.dependsOn(shadowJar)
-tasks.prepareSpigotPlugins.dependsOn(shadowJar)
 
 test {
     useJUnitPlatform()
