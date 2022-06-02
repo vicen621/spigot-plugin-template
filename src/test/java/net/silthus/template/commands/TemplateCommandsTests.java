@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TemplateCommandsTests extends TestBase {
 
-    private PlayerMock player;
+    /*private PlayerMock player;
 
     @Override
     @BeforeEach
@@ -27,5 +27,5 @@ public class TemplateCommandsTests extends TestBase {
 
         int minutesPlayed = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
         assertThat(player.nextMessage()).contains("Your name is: Player0. Playtime: " + minutesPlayed);
-    }
+    }*/
 }

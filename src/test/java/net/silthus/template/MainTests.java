@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 public class MainTests extends TestBase {
 
-    @Test
+    /*@Test
     public void shouldFirePlayerJoinEvent() {
         server.addPlayer();
 
         server.getPluginManager().assertEventFired(PlayerJoinEvent.class);
-    }
+    }*/
 }
