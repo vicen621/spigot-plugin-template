@@ -1,0 +1,5 @@
+# See https://github.com/aikar/commands/wiki/Locales
+commands:
+  descriptions:
+    info: 'Muestra el nombre del jugador y su tiempo de juego'
+  info: 'Tu nombre es: {player}. Tiempo de juego: {play_time}.'
