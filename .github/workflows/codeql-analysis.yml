@@ -57,13 +57,6 @@ jobs:
       with:
         java-version: 17
 
-    - name: Cache Gradle
-      id: cache-gradle
-      uses: actions/cache@v1
-      with:
-        path: ~/.gradle
-        key: ${{ runner.os }}-gradle
-
     - uses: actions/checkout@v1
 
     - name: Grant execute permission to gradlew
