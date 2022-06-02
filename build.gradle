@@ -74,7 +74,7 @@ dependencies {
 }
 
 shadowJar {
-    classifier = ''
+    classifier ""
     dependencies {
         include(dependency('co.aikar:acf-paper:0.5.1-SNAPSHOT'))
         include(dependency('net.silthus.configlib:configlib-bukkit:'))
