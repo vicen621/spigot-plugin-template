@@ -1,7 +1,6 @@
 package net.silthus.template.commands;
 
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import net.silthus.template.Constants;
 import net.silthus.template.TestBase;
 import org.bukkit.Statistic;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,7 @@ public class TemplateCommandsTests extends TestBase {
         super.setUp();
 
         player = server.addPlayer();
-        player.addAttachment(plugin, Constants.INFO_CMD_PERMISSION, true);
+        player.addAttachment(plugin, "cmd.perm", true);
     }
 
     @Test
