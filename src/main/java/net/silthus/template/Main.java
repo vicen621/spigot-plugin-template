@@ -35,6 +35,8 @@ public class Main extends JavaPlugin {
         commandManager.enableUnstableAPI("help");
 
         commandManager.setFormat(MessageType.HELP, ChatColor.DARK_AQUA, ChatColor.AQUA, ChatColor.GRAY, ChatColor.DARK_GRAY);
+        
+        loadCommandLocales(commandManager);
     }
 
     // see https://github.com/aikar/commands/wiki/Locales
