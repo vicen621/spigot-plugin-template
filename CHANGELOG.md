@@ -1,3 +1,10 @@
+## [4.6.1](https://github.com/vicen621/vicen621-plugin-template/compare/v4.6.0...v4.6.1) (2022-06-07)
+
+
+### Bug Fixes
+
+* added Main#loadCommandLocales to Main#setupCommands ([43cf767](https://github.com/vicen621/vicen621-plugin-template/commit/43cf767b2f0bcd9dbfd368b2f9efb726dcd2375f))
+
 # [4.6.0](https://github.com/vicen621/spigot-plugin-template/compare/v4.5.2...v4.6.0) (2022-06-02)
 
 
