@@ -5,11 +5,12 @@ buildscript {
 }
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
-    id 'io.freefair.lombok' version '6.3.0'
     id 'java'
-    id 'jacoco'
     id 'idea'
+    id 'jacoco'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'io.freefair.lombok' version '6.3.0'
+    id 'kr.entree.spigradle' version '2.4.2'
 }
 
 apply from: "$rootDir/gradle/jacoco.gradle"
@@ -28,11 +29,23 @@ ext {
 
 group project.property("group")
 
+spigot {
+    name = project.property("pluginName")
+    authors = [project.property("author")]
+    apiVersion = project.property("apiVersion")
+    version = project.property("version")
+    load = STARTUP
+}
+
 compileJava {
     options.encoding = 'UTF-8'
     options.compilerArgs += ["-parameters"]
     options.fork = true
     options.forkOptions.executable = 'javac'
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
 }
 
 archivesBaseName = project.property("pluginName")
@@ -61,26 +74,23 @@ dependencies {
     // Annotation Command Framework: https://github.com/aikar/commands
     implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
 
-    implementation 'net.silthus.configlib:configlib-bukkit:2.6.0'
+    implementation ('net.silthus.configlib:configlib-bukkit:2.6.0') {
+        exclude group: 'net.md-5', module: 'bungeecord-chat'
+        exclude group: 'org.spigotmc', module: 'spigot-api'
+    }
 
     implementation 'me.yushust.message:core:7.0.0'
     implementation 'me.yushust.message:sourcetype-bukkit-yml:7.0.0'
 
     // Test dependencies
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    testImplementation 'org.mockito:mockito-core:4.0.0'
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.17:1.7.0'
-    testImplementation 'org.assertj:assertj-core:3.21.0'
+    testImplementation 'org.mockito:mockito-core:4.6.1'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.17:2.22.2'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
 }
 
 shadowJar {
     classifier ""
-    dependencies {
-        include(dependency('co.aikar:acf-paper:0.5.1-SNAPSHOT'))
-        include(dependency('net.silthus.configlib:configlib-bukkit:'))
-        include(dependency('me.yushust.message:core:'))
-        include(dependency('me.yushust.message:sourcetype-bukkit-yml:'))
-    }
     relocate 'co.aikar.commands', "${packageName}.acf"
     relocate 'co.aikar.locales', "${packageName}.locales"
     relocate 'de.exlll.configlib', "${packageName}.configlib"
