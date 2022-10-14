@@ -1,3 +1,10 @@
+## [4.5.3](https://github.com/vicen621/vicen621-plugin-template/compare/v4.5.2...v4.5.3) (2022-10-14)
+
+
+### Bug Fixes
+
+* **docs:** update discord link ([5bcdf96](https://github.com/vicen621/vicen621-plugin-template/commit/5bcdf962b4515944d0b52dd785e145bd91c8799f)), closes [#164](https://github.com/vicen621/vicen621-plugin-template/issues/164)
+
 ## [4.5.3](https://github.com/sVoxelDev/spigot-plugin-template/compare/v4.5.2...v4.5.3) (2022-07-27)
 
 
